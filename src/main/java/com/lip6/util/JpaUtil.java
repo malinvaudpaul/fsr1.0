@@ -5,15 +5,15 @@ import javax.persistence.Persistence;
 
 public class JpaUtil {
 	   /** 
-     * Singleton de l’EntityManagerFactory de l’application 
+     * Singleton de lï¿½EntityManagerFactory de lï¿½application 
      */ 
     private static EntityManagerFactory emf = null; 
  
     /** 
-     * Permet de récupérer l’EntityManagerFactory de  
-     * l’application tout en le créant s’il n’existe pas 
+     * Permet de rï¿½cupï¿½rer lï¿½EntityManagerFactory de  
+     * lï¿½application tout en le crï¿½ant sï¿½il nï¿½existe pas 
      *  
-     * @return l’EntityManagerFactory unique de l’application 
+     * @return lï¿½EntityManagerFactory unique de lï¿½application 
      */ 
     public static EntityManagerFactory getEmf() { 
         if(emf == null){ 
@@ -23,8 +23,8 @@ public class JpaUtil {
     } 
  
     /** 
-     * Libère les ressources et détruit l’EntityManagerFactory 
-     * si jamais il faut le recréer. 
+     * Libï¿½re les ressources et dï¿½truit lï¿½EntityManagerFactory 
+     * si jamais il faut le recrï¿½er. 
      */ 
     public static void close(){ 
         if(emf!=null){ 

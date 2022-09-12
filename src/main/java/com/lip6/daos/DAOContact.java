@@ -7,10 +7,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceUnit;
 
 import com.lip6.entities.Address;
 import com.lip6.entities.Contact;
+import com.lip6.entities.ContactGroup;
 import com.lip6.entities.Messages;
 import com.lip6.entities.PhoneNumber;
 import com.lip6.util.JpaUtil;
@@ -25,11 +29,15 @@ public class DAOContact implements IDAOContact {
 	 * @param email
 	 * @return renvoit le nouveau contact
 	 */
+
 	@Override
 	public boolean addContact(String firstname, String lastname, String email) {
 		
 		boolean success = false;
 		try {
+			
+			
+			Persistence.createEntityManagerFactory("projetJPA");
 			EntityManager em = JpaUtil.getEmf().createEntityManager();
 			
 			Contact c1 = new Contact("Xavier", "BLANC", "XavierBlanc@gmail.com");
@@ -74,6 +82,10 @@ public class DAOContact implements IDAOContact {
 			c1.getPhones().add(pn2);
 			c2.getPhones().add(pn3);
 			
+			ContactGroup contactgroup = new ContactGroup("my group");
+			contactgroup.addContact(c1);
+			contactgroup.addContact(c2);
+			
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
 			
@@ -81,6 +93,10 @@ public class DAOContact implements IDAOContact {
 			em.persist(c2);
 			
 			tx.commit();
+			
+			//récupérer entité
+			Contact c = em.find(Contact.class,(long)1);
+			System.out.println(c.getIdContact() + " " + c.getFirstName() + " " + c.getLastName());
 			
 			em.close();
 			success = true;
@@ -106,7 +122,7 @@ public class DAOContact implements IDAOContact {
 			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"),
 					Messages.getString("password"));
 			Statement stmt = con.createStatement();
-			String request = "DELETE FROM contacts WHERE id = " + id;
+			String request = "DELETE FROM contact WHERE id = " + id;
 			success = stmt.executeUpdate(request);
 			stmt.close();
 			con.close();
@@ -134,7 +150,7 @@ public class DAOContact implements IDAOContact {
 			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"),
 					Messages.getString("password"));
 			Statement stmt = con.createStatement();
-			rec = stmt.executeQuery("SELECT * FROM contacts WHERE id = " + id);
+			rec = stmt.executeQuery("SELECT * FROM contact WHERE id = " + id);
 
 			if (rec.next() == false) {
 				System.out.println("ResultSet in empty in Java");
@@ -176,9 +192,9 @@ public class DAOContact implements IDAOContact {
 			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"),
 					Messages.getString("password"));
 			Statement stmt = con.createStatement();
-			String sqlFirstName = "UPDATE contacts SET firstname = " + "'" + firstname + "'" + " WHERE id = " + id;
-			String sqlLastName = "UPDATE contacts SET lastname = " + "'" + lastname + "'" + " WHERE id = " + id;
-			String sqlEmail = "UPDATE contacts SET email = " + "'" + email + "'" + " WHERE id = " + id;
+			String sqlFirstName = "UPDATE contact SET firstname = " + "'" + firstname + "'" + " WHERE id = " + id;
+			String sqlLastName = "UPDATE contact SET lastname = " + "'" + lastname + "'" + " WHERE id = " + id;
+			String sqlEmail = "UPDATE contact SET email = " + "'" + email + "'" + " WHERE id = " + id;
 
 			if (firstname != "")
 				stmt.executeUpdate(sqlFirstName);
@@ -215,7 +231,7 @@ public class DAOContact implements IDAOContact {
 			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"),
 					Messages.getString("password"));
 			Statement stmt = con.createStatement();
-			rec = stmt.executeQuery("SELECT * FROM contacts WHERE firstname = " + "'" + firstname + "'");
+			rec = stmt.executeQuery("SELECT * FROM contact WHERE firstname = " + "'" + firstname + "'");
 
 			while (rec.next()) {
 				Contact contact = new Contact();
@@ -255,7 +271,7 @@ public class DAOContact implements IDAOContact {
 			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"),
 					Messages.getString("password"));
 			Statement stmt = con.createStatement();
-			rec = stmt.executeQuery("SELECT * FROM contacts WHERE lastname = " + "'" + lastname + "'");
+			rec = stmt.executeQuery("SELECT * FROM contact WHERE lastname = " + "'" + lastname + "'");
 
 			while (rec.next()) {
 				Contact contact = new Contact();
@@ -293,7 +309,7 @@ public class DAOContact implements IDAOContact {
 			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"),
 					Messages.getString("password"));
 			Statement stmt = con.createStatement();
-			rec = stmt.executeQuery("SELECT * FROM contacts WHERE email = " + "'" + email + "'");
+			rec = stmt.executeQuery("SELECT * FROM contact WHERE email = " + "'" + email + "'");
 
 			while (rec.next()) {
 				Contact contact = new Contact();
