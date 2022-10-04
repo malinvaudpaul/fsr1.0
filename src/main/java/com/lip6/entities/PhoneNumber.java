@@ -22,6 +22,13 @@ public class PhoneNumber {
 	public PhoneNumber(){
 	}
 		
+	public PhoneNumber(int id, String phoneKind, String phoneNumber, Contact contact) {
+		super();
+		setId(id);
+		setPhoneKind(phoneKind);
+		setPhoneNumber(phoneNumber);
+		setContact(contact);
+	}
 
 	public int getId() {
 		return id;

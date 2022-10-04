@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import com.lip6.daos.IDAOContact;
 import com.lip6.services.ServiceContact;
 
 /**
@@ -22,8 +26,7 @@ public class AddContactServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public AddContactServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+    	
     }
 
 	/**
@@ -39,6 +42,15 @@ public class AddContactServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		
+		String[] allBeanNames = context.getBeanDefinitionNames();
+        for(String beanName : allBeanNames) {
+            System.out.println(beanName + "******************");
+        }
+    	IDAOContact dao = (IDAOContact)context.getBean("cdao");
+    	dao.addContact("firstname", "lastname", "email");
+		
 		String fname=request.getParameter("fname");
 		String lname=request.getParameter("lname");
 		String email=request.getParameter("email"); 

@@ -98,6 +98,12 @@ public class DAOContact implements IDAOContact {
 			Contact c = em.find(Contact.class,(long)1);
 			System.out.println(c.getIdContact() + " " + c.getFirstName() + " " + c.getLastName());
 			
+			//Supprimer une entité
+			Contact pASupp = em.find(Contact.class, (long)1);
+			em.remove(pASupp);
+			Contact pASuppEXCEP = em.find(Contact.class, (long)1);
+
+			
 			em.close();
 			success = true;
 			
