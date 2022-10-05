@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.lip6.daos.DAOContact;
 import com.lip6.daos.IDAOContact;
 import com.lip6.services.ServiceContact;
 
@@ -44,11 +45,12 @@ public class AddContactServlet extends HttpServlet {
 
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		
-		String[] allBeanNames = context.getBeanDefinitionNames();
+		/*String[] allBeanNames = context.getBeanDefinitionNames();
         for(String beanName : allBeanNames) {
             System.out.println(beanName + "******************");
         }
-    	IDAOContact dao = (IDAOContact)context.getBean("cdao");
+    	IDAOContact dao = (IDAOContact)context.getBean("cdao");*/
+		IDAOContact dao = new DAOContact();
     	dao.addContact("firstname", "lastname", "email");
 		
 		String fname=request.getParameter("fname");

@@ -11,21 +11,20 @@ public class ServiceContact {
 		IDAOContact daoc=new DAOContact();
 		boolean success = daoc.addContact(fname, lname, email);
 		if (success) 
-			System.out.println("Contact ajouté!");
+			System.out.println("Contact ajoutï¿½!");
 		
 		else 
-			System.out.println("Contact non ajouté!");
+			System.out.println("Contact non ajoutï¿½!");
 		}
 	
 	public void deleteContact(long id) {
 		
 		IDAOContact daoc=new DAOContact();
-		int success=daoc.deleteContact(id);
-		if (success == 0)
-			System.out.println("Contact non supprimé!");
+		boolean success=daoc.deleteContact(id);
+		if (!success)
+			System.out.println("Contact non supprimï¿½!");
 		else
-			System.out.println("Contact supprimé!");
-		
+			System.out.println("Contact supprimï¿½!");
 	}
 	
 	public void modifyContact(long id, String fname, String lname, String email) {
@@ -33,9 +32,9 @@ public class ServiceContact {
 		IDAOContact daoc=new DAOContact();
 		boolean ok=daoc.modifyContact(id, fname, lname, email);
 		if (ok)
-			System.out.println("Contact modifié!");
+			System.out.println("Contact modifiï¿½!");
 		else
-			System.out.println("Contact non modifié!");
+			System.out.println("Contact non modifiï¿½!");
 		
 	}
 	

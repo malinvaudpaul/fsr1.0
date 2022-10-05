@@ -40,8 +40,8 @@ public class DAOContact implements IDAOContact {
 			Persistence.createEntityManagerFactory("projetJPA");
 			EntityManager em = JpaUtil.getEmf().createEntityManager();
 			
-			Contact c1 = new Contact("Xavier", "BLANC", "XavierBlanc@gmail.com");
-			Contact c2 = new Contact("Jean", "PIERRE", "JeanPierre@gmail.com");
+			Contact c1 = new Contact(firstname,lastname,email);
+			/*Contact c2 = new Contact("Jean", "PIERRE", "JeanPierre@gmail.com");
 
 			PhoneNumber pn1 = new PhoneNumber();
 			PhoneNumber pn2 = new PhoneNumber();
@@ -84,24 +84,23 @@ public class DAOContact implements IDAOContact {
 			
 			ContactGroup contactgroup = new ContactGroup("my group");
 			contactgroup.addContact(c1);
-			contactgroup.addContact(c2);
+			contactgroup.addContact(c2);*/
 			
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
 			
 			em.persist(c1);
-			em.persist(c2);
-			
+						
 			tx.commit();
 			
 			//récupérer entité
-			Contact c = em.find(Contact.class,(long)1);
-			System.out.println(c.getIdContact() + " " + c.getFirstName() + " " + c.getLastName());
+			/*Contact c = em.find(Contact.class,(long)1);
+			System.out.println(c.getIdContact() + " " + c.getFirstName() + " " + c.getLastName());*/
 			
 			//Supprimer une entité
-			Contact pASupp = em.find(Contact.class, (long)1);
+			/*Contact pASupp = em.find(Contact.class, (long)1);
 			em.remove(pASupp);
-			Contact pASuppEXCEP = em.find(Contact.class, (long)1);
+			Contact pASuppEXCEP = em.find(Contact.class, (long)1);*/
 
 			
 			em.close();
@@ -120,19 +119,19 @@ public class DAOContact implements IDAOContact {
 	 * @return vrai si la suppression a bien ete effectuee
 	 */
 	@Override
-	public int deleteContact(long id) {
-		int success = 0;
-		Connection con = null;
+	public boolean deleteContact(long id) {
+		boolean success = false;
 		try {
-			Class.forName(Messages.getString("driver"));
-			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"),
-					Messages.getString("password"));
-			Statement stmt = con.createStatement();
-			String request = "DELETE FROM contact WHERE id = " + id;
-			success = stmt.executeUpdate(request);
-			stmt.close();
-			con.close();
+			EntityManager em = JpaUtil.getEmf().createEntityManager();
+			Contact c = em.find(Contact.class,id);
+			EntityTransaction tx = em.getTransaction();
+			tx.begin();
+			
+			em.remove(c);
+			tx.commit();
 
+			em.close();
+			success = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -148,36 +147,18 @@ public class DAOContact implements IDAOContact {
 	 */
 	@Override
 	public Contact getContact(long id) {
-		ResultSet rec = null;
-		Contact contact = null;
-		Connection con = null;
+		
 		try {
-			Class.forName(Messages.getString("driver"));
-			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"),
-					Messages.getString("password"));
-			Statement stmt = con.createStatement();
-			rec = stmt.executeQuery("SELECT * FROM contact WHERE id = " + id);
+			EntityManager em = JpaUtil.getEmf().createEntityManager();
+			Contact c =em.find(Contact.class,id);
+			return c;
 
-			if (rec.next() == false) {
-				System.out.println("ResultSet in empty in Java");
-			} else {
-				do {
-					contact=new Contact();
-					contact.setIdContact(Long.parseLong(rec.getString("id")));
-					contact.setFirstName(rec.getString("firstname"));
-					contact.setLastName(rec.getString("lastname"));
-					contact.setEmail(rec.getString("email"));
-				} while (rec.next());
-			}
-
-			stmt.close();
-			rec.close();
-			con.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		return contact;
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	/**
@@ -192,27 +173,19 @@ public class DAOContact implements IDAOContact {
 	@Override
 	public boolean modifyContact(long id, String firstname, String lastname, String email) {
 		boolean success = false;
-		Connection con = null;
 		try {
-			Class.forName(Messages.getString("driver"));
-			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"),
-					Messages.getString("password"));
-			Statement stmt = con.createStatement();
-			String sqlFirstName = "UPDATE contact SET firstname = " + "'" + firstname + "'" + " WHERE id = " + id;
-			String sqlLastName = "UPDATE contact SET lastname = " + "'" + lastname + "'" + " WHERE id = " + id;
-			String sqlEmail = "UPDATE contact SET email = " + "'" + email + "'" + " WHERE id = " + id;
-
-			if (firstname != "")
-				stmt.executeUpdate(sqlFirstName);
-			if (lastname != "")
-				stmt.executeUpdate(sqlLastName);
-			if (email != "")
-				stmt.executeUpdate(sqlEmail);
-
-			success = true;
-			stmt.close();
-			con.close();
-
+			EntityManager em = JpaUtil.getEmf().createEntityManager();			
+			Contact c = em.find(Contact.class,id);
+			EntityTransaction tx = em.getTransaction();
+			tx.begin();
+			c.setFirstName(firstname);
+			c.setLastName(lastname);
+			c.setEmail(email);
+			
+			em.persist(c);
+						
+			tx.commit();
+			success=true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

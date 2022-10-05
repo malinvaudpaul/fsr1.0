@@ -63,7 +63,7 @@ public class DAOPhoneNumber {
 		return success;
 	}
 	
-	public boolean RemovePhoneNumber(int id) {
+	public boolean DeletePhoneNumber(int id) {
 		
 		boolean success = false;
 		try {
@@ -86,7 +86,7 @@ public class DAOPhoneNumber {
 		return success;	
 	}
 	
-	public PhoneNumber getPhoneNumber(int id) {
+	public PhoneNumber GetPhoneNumber(int id) {
 		try {
 			EntityManager em = JpaUtil.getEmf().createEntityManager();
 			
