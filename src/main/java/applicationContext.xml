@@ -15,11 +15,11 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd">
         
 <!--   
-   <context:component-scan base-package="com.lip6.services.*" />
+   <context:component-scan base-package="com.fsr.services.*" />
     <context:annotation-config/> -->
 
-<bean id="cdao" class="com.lip6.daos.DAOContact"/>
-<bean id ="contact" class="com.lip6.entities.Contact"/>
+<bean id="cdao" class="com.fsr.daos.DAOContact"/>
+<bean id ="contact" class="com.fsr.entities.Contact"/>
 
 
 </beans>

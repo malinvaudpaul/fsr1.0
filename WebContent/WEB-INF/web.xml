@@ -23,7 +23,7 @@
 </context-param>
 <context-param>
 <param-name>contextConfigLocation</param-name>
-<!--  <param-value>com.lip6.services, com.lip6.daos</param-value>  -->
-<param-value>com.lip6.configuration</param-value>
+<!--  <param-value>com.fsr.services, com.fsr.daos</param-value>  -->
+<param-value>com.fsr.configuration</param-value>
 </context-param>
 </web-app>
