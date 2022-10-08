@@ -1,4 +1,4 @@
-package com.lip6.servlets;
+package com.lip6.servlets.PhoneNumber;
 
 import java.io.IOException;
 
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lip6.services.ServiceContact;
+import com.lip6.services.ServicePhoneNumber;
 
 /**
- * Servlet implementation class GetContactServlet
+ * Servlet implementation class DeletePhoneNumberServlet
  */
-@WebServlet("/GetContactServlet")
-public class GetContactServlet extends HttpServlet {
+@WebServlet("/DeletePhoneNumberServlet")
+public class DeletePhoneNumberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetContactServlet() {
+    public DeletePhoneNumberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,8 +41,8 @@ public class GetContactServlet extends HttpServlet {
 		
 		long id=Long.parseLong(request.getParameter("id"));
 		
-		ServiceContact src=new ServiceContact();
-		src.getContact(id);
+		ServicePhoneNumber src=new ServicePhoneNumber();
+		src.deletePhoneNumber(id);
 		
 		RequestDispatcher rd=request.getRequestDispatcher("main.jsp");
 		rd.forward(request, response);

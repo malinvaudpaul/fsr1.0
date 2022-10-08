@@ -1,4 +1,4 @@
-package com.lip6.servlets;
+package com.lip6.servlets.ContactGroup;
 
 import java.io.IOException;
 
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lip6.services.ServiceContact;
+import com.lip6.services.ServiceContactGroup;
 
 /**
- * Servlet implementation class DeleteContactServlet
+ * Servlet implementation class DeleteContactGroupServlet
  */
-@WebServlet("/DeleteContactServlet")
-public class DeleteContactServlet extends HttpServlet {
+@WebServlet("/DeleteContactGroupServlet")
+public class DeleteContactGroupGroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteContactServlet() {
+    public DeleteContactGroupGroupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,8 +41,8 @@ public class DeleteContactServlet extends HttpServlet {
 		
 		long id=Long.parseLong(request.getParameter("id"));
 		
-		ServiceContact src=new ServiceContact();
-		src.deleteContact(id);
+		ServiceContactGroup src=new ServiceContactGroup();
+		src.deleteContactGroup(id);
 		
 		RequestDispatcher rd=request.getRequestDispatcher("main.jsp");
 		rd.forward(request, response);

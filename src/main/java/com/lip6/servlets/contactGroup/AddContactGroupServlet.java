@@ -1,4 +1,4 @@
-package com.lip6.servlets;
+package com.lip6.servlets.adress;
 
 import java.io.IOException;
 
@@ -12,15 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.lip6.daos.DAOContact;
-import com.lip6.daos.IDAOContact;
-import com.lip6.services.ServiceAdress;
-import com.lip6.services.ServiceContact;
+import com.lip6.daos.DAOContactGroup;
+import com.lip6.daos.IDAOContactGroup;
+import com.lip6.services.ServiceContactGroup;
 
-@WebServlet("/AddAdressServlet")
-public class AddAdressServlet extends HttpServlet{
+@WebServlet("/AddContactGroupServlet")
+public class AddContactGroupGroupServlet extends HttpServlet{
 	
-	public AddAdressServlet() {
+	public AddContactGroupGroupServlet() {
 		
 	}
 
@@ -40,9 +39,9 @@ public class AddAdressServlet extends HttpServlet{
         for(String beanName : allBeanNames) {
             System.out.println(beanName + "******************");
         }
-    	IDAOContact dao = (IDAOContact)context.getBean("cdao");*/
-		//DAOAdress dao = new DAOContact();
-    	//dao.addContact("firstname", "lastname", "email");
+    	IDAOContactGroup dao = (IDAOContactGroup)context.getBean("cdao");*/
+		//DAOAdress dao = new DAOContactGroup();
+    	//dao.addContactGroup("firstname", "lastname", "email");
 		
 		String street=request.getParameter("street");
 		String city=request.getParameter("city");

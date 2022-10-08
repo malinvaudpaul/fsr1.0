@@ -1,4 +1,4 @@
-package com.lip6.servlets;
+package com.lip6.servlets.contact;
 
 import java.io.IOException;
 
@@ -9,25 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-
-import com.lip6.daos.DAOContact;
-import com.lip6.daos.IDAOContact;
 import com.lip6.services.ServiceContact;
 
 /**
- * Servlet implementation class AddContactServlet
+ * Servlet implementation class ModifyContactServlet
  */
-@WebServlet("/AddContactServlet")
-public class AddContactServlet extends HttpServlet {
+@WebServlet("/ModifyContactServlet")
+public class ModifyContactServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddContactServlet() {
-    	
+    public ModifyContactServlet() {
+        super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -42,26 +38,17 @@ public class AddContactServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		
-		/*String[] allBeanNames = context.getBeanDefinitionNames();
-        for(String beanName : allBeanNames) {
-            System.out.println(beanName + "******************");
-        }
-    	IDAOContact dao = (IDAOContact)context.getBean("cdao");*/
-		IDAOContact dao = new DAOContact();
-    	dao.addContact("firstname", "lastname", "email");
-		
+		long id=Long.parseLong(request.getParameter("id"));
 		String fname=request.getParameter("fname");
 		String lname=request.getParameter("lname");
 		String email=request.getParameter("email"); 
 		
 		ServiceContact src=new ServiceContact();
-		src.createContact(fname, lname, email);
+		src.modifyContact(id, fname, lname, email);
 		
 		RequestDispatcher rd=request.getRequestDispatcher("main.jsp");
 		rd.forward(request, response);
-		}
+	}
 
 }

@@ -1,4 +1,4 @@
-package com.lip6.servlets;
+package com.lip6.servlets.PhoneNumber;
 
 import java.io.IOException;
 
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lip6.services.ServiceContact;
+import com.lip6.services.ServicePhoneNumber;
 
 /**
- * Servlet implementation class ModifyContactServlet
+ * Servlet implementation class ModifyPhoneNumberServlet
  */
-@WebServlet("/ModifyContactServlet")
-public class ModifyContactServlet extends HttpServlet {
+@WebServlet("/ModifyPhoneNumberServlet")
+public class ModifyPhoneNumberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModifyContactServlet() {
+    public ModifyPhoneNumberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,8 +44,8 @@ public class ModifyContactServlet extends HttpServlet {
 		String lname=request.getParameter("lname");
 		String email=request.getParameter("email"); 
 		
-		ServiceContact src=new ServiceContact();
-		src.modifyContact(id, fname, lname, email);
+		ServicePhoneNumber src=new ServicePhoneNumber();
+		src.modifyPhoneNumber(id, fname, lname, email);
 		
 		RequestDispatcher rd=request.getRequestDispatcher("main.jsp");
 		rd.forward(request, response);
