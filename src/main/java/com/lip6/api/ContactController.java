@@ -18,9 +18,6 @@ import org.springframework.web.bind
 import org.springframework.web.servlet
     .support.ServletUriComponentsBuilder;
 
-// Import the above-defined classes
-// to use the properties of those
-// classes
 import com.lip6.entities.Contact;
 import com.lip6.daos.DAOContact;
 

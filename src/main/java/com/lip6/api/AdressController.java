@@ -1,6 +1,8 @@
 package com.lip6.api;
 
 import java.net.URI;
+import java.util.List;
+
 import org.springframework.beans
     .factory.annotation.Autowired;
 import org.springframework.http
@@ -18,9 +20,6 @@ import org.springframework.web.bind
 import org.springframework.web.servlet
     .support.ServletUriComponentsBuilder;
 
-// Import the above-defined classes
-// to use the properties of those
-// classes
 import com.lip6.entities.Address;
 import com.lip6.services.ServiceAddress;
 
@@ -29,16 +28,6 @@ import com.lip6.services.ServiceAddress;
 public class AddressController {
 
     private ServiceAddress serviceAddress;
-
-
-    @GetMapping(
-        path = "/",
-        produces = "application/json")
-
-    public Addresss getAddresses()
-    {
-        return serviceAddress.readAll();
-    }
 
 
     @PostMapping(
@@ -72,5 +61,45 @@ public class AddressController {
                return ResponseEntity
             .created(location)
             .build();
+    }
+
+    @GetMapping(
+        path = "/{id}",
+        produces = "application/json")
+
+    public Address getAddresseById(@PathVariable("id") int id)
+    {
+        return serviceAddress.read(id);
+    }
+
+    @GetMapping(
+        path = "/",
+        produces = "application/json")
+
+    public List<Address> getAddresses()
+    {
+        return serviceAddress.readAll();
+    }
+
+    @UpdateMapping(
+        path = "/{id}",
+        consumes = "application/json",
+        produces = "application/json")
+    
+    public Addresss updateAddress(
+        @PathVariable("id") int id,
+        @RequestBody Address address)
+    {
+        address.setId(id);
+        return serviceAddress.update(address);
+    }
+
+    @DeleteMapping(
+        path = "/{id}",
+        produces = "application/json")
+
+    public void deleteAddress(@PathVariable("id") int id)
+    {
+        serviceAddress.delete(id);
     }
 }
