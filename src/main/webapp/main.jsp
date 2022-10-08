@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="addadress.jsp"><h1>Create a new Adress</h1></a>
-<a href="deleteadress.jsp"><h1>Delete a Adress</h1></a>
-<a href="modifyadress.jsp"><h1>Modify a Adress</h1></a>
-<a href="getadress.jsp"><h1>Get a Adress</h1></a>
+<a href="addaddress.jsp"><h1>Create a new Address</h1></a>
+<a href="deleteaddress.jsp"><h1>Delete a Address</h1></a>
+<a href="modifyaddress.jsp"><h1>Modify a Address</h1></a>
+<a href="getaddress.jsp"><h1>Get a Address</h1></a>
 <a href="addcontact.jsp"><h1>Create a new Contact</h1></a>
 <a href="deletecontact.jsp"><h1>Delete a Contact</h1></a>
 <a href="modifycontact.jsp"><h1>Modify a Contact</h1></a>

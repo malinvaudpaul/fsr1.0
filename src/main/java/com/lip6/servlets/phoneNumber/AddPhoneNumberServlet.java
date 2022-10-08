@@ -1,4 +1,4 @@
-package com.lip6.servlets.adress;
+package com.lip6.servlets.address;
 
 import java.io.IOException;
 
@@ -18,9 +18,9 @@ import com.lip6.services.ServicePhoneNumber;
 
 @WebServlet("/AddPhoneNumberServlet")
 public class AddPhoneNumberServlet extends HttpServlet{
-	
+
 	public AddPhoneNumberServlet() {
-		
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,24 +34,24 @@ public class AddPhoneNumberServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-		
+
 		/*String[] allBeanNames = context.getBeanDefinitionNames();
         for(String beanName : allBeanNames) {
             System.out.println(beanName + "******************");
         }
     	IDAOPhoneNumber dao = (IDAOPhoneNumber)context.getBean("cdao");*/
-		//DAOAdress dao = new DAOPhoneNumber();
+		//DAOAddress dao = new DAOPhoneNumber();
     	//dao.addPhoneNumber("firstname", "lastname", "email");
-		
+
 		String street=request.getParameter("street");
 		String city=request.getParameter("city");
-		String zip=request.getParameter("zip"); 
-		String country=request.getParameter("country"); 
+		String zip=request.getParameter("zip");
+		String country=request.getParameter("country");
 
-		
-		ServiceAdress src=new ServiceAdress();
-		src.createAdress(street, city, zip,country);
-		
+
+		ServiceAddress src=new ServiceAddress();
+		src.createAddress(street, city, zip,country);
+
 		RequestDispatcher rd=request.getRequestDispatcher("main.jsp");
 		rd.forward(request, response);
 		}

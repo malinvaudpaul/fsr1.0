@@ -24,12 +24,12 @@ public class Contact {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private long idContact;
 	@OneToOne(cascade=CascadeType.PERSIST)
-	@JoinColumn(name="idAdresse")
+	@JoinColumn(name="idAddresse")
 	private Address address;
 
 	public Contact(){
 	}
-	
+
 
 	public Contact(String firstName, String lastName, String email, long idContact) {
 		this(firstName, lastName, email);
@@ -48,24 +48,24 @@ public class Contact {
 	public String getEmail(){
 		return email;
 	}
-	
+
 	public void setEmail(String email){
 		this.email = email;
 	}
-	
+
 	public String getFirstName(){
 		return firstName;
 	}
-	
+
 	public void setFirstName(String firstname){
 		this.firstName = firstname;
 	}
-	
-	
+
+
 	public String getLastName(){
 		return lastName;
 	}
-	
+
 	public void setLastName(String lastname){
 		this.lastName = lastname;
 	}
@@ -76,8 +76,8 @@ public class Contact {
 
 	public void setIdContact(long idContact) {
 		this.idContact = idContact;
-	}	
-	
+	}
+
 	public Set<PhoneNumber> getPhones() {
 		return phones;
 	}
@@ -85,7 +85,7 @@ public class Contact {
 	public void setPhones(Set<PhoneNumber> phones) {
 		this.phones = phones;
 	}
-	
+
 	public Address getAddress() {
 		return address;
 	}

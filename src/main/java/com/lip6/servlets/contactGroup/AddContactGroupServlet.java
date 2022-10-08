@@ -1,4 +1,4 @@
-package com.lip6.servlets.adress;
+package com.lip6.servlets.address;
 
 import java.io.IOException;
 
@@ -18,9 +18,9 @@ import com.lip6.services.ServiceContactGroup;
 
 @WebServlet("/AddContactGroupServlet")
 public class AddContactGroupGroupServlet extends HttpServlet{
-	
+
 	public AddContactGroupGroupServlet() {
-		
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,24 +34,24 @@ public class AddContactGroupGroupServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-		
+
 		/*String[] allBeanNames = context.getBeanDefinitionNames();
         for(String beanName : allBeanNames) {
             System.out.println(beanName + "******************");
         }
     	IDAOContactGroup dao = (IDAOContactGroup)context.getBean("cdao");*/
-		//DAOAdress dao = new DAOContactGroup();
+		//DAOAddress dao = new DAOContactGroup();
     	//dao.addContactGroup("firstname", "lastname", "email");
-		
+
 		String street=request.getParameter("street");
 		String city=request.getParameter("city");
-		String zip=request.getParameter("zip"); 
-		String country=request.getParameter("country"); 
+		String zip=request.getParameter("zip");
+		String country=request.getParameter("country");
 
-		
-		ServiceAdress src=new ServiceAdress();
-		src.createAdress(street, city, zip,country);
-		
+
+		ServiceAddress src=new ServiceAddress();
+		src.createAddress(street, city, zip,country);
+
 		RequestDispatcher rd=request.getRequestDispatcher("main.jsp");
 		rd.forward(request, response);
 		}

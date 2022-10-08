@@ -1,4 +1,4 @@
-package com.lip6.servlets.Adress;
+package com.lip6.servlets.Address;
 
 import java.io.IOException;
 
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lip6.services.ServiceAdress;
+import com.lip6.services.ServiceAddress;
 
 /**
- * Servlet implementation class DeleteAdressServlet
+ * Servlet implementation class DeleteAddressServlet
  */
-@WebServlet("/DeleteAdressServlet")
-public class DeleteAdressServlet extends HttpServlet {
+@WebServlet("/DeleteAddressServlet")
+public class DeleteAddressServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteAdressServlet() {
+    public DeleteAddressServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,12 +38,12 @@ public class DeleteAdressServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		long id=Long.parseLong(request.getParameter("id"));
-		
-		ServiceAdress src=new ServiceAdress();
-		src.deleteAdress(id);
-		
+
+		ServiceAddress src=new ServiceAddress();
+		src.deleteAddress(id);
+
 		RequestDispatcher rd=request.getRequestDispatcher("main.jsp");
 		rd.forward(request, response);
 	}

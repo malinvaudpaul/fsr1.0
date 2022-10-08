@@ -1,4 +1,4 @@
-package com.lip6.servlets.Adress;
+package com.lip6.servlets.Address;
 
 import java.io.IOException;
 
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lip6.services.ServiceAdress;
+import com.lip6.services.ServiceAddress;
 
 /**
- * Servlet implementation class ModifyAdressServlet
+ * Servlet implementation class ModifyAddressServlet
  */
-@WebServlet("/ModifyAdressServlet")
-public class ModifyAdressServlet extends HttpServlet {
+@WebServlet("/ModifyAddressServlet")
+public class ModifyAddressServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModifyAdressServlet() {
+    public ModifyAddressServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,15 +38,15 @@ public class ModifyAdressServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		long id=Long.parseLong(request.getParameter("id"));
 		String fname=request.getParameter("fname");
 		String lname=request.getParameter("lname");
-		String email=request.getParameter("email"); 
-		
-		ServiceAdress src=new ServiceAdress();
-		src.modifyAdress(id, fname, lname, email);
-		
+		String email=request.getParameter("email");
+
+		ServiceAddress src=new ServiceAddress();
+		src.modifyAddress(id, fname, lname, email);
+
 		RequestDispatcher rd=request.getRequestDispatcher("main.jsp");
 		rd.forward(request, response);
 	}
