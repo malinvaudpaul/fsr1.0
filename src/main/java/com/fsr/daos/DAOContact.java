@@ -13,7 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class DAOContact implements IDAO {
+public class DAOContact implements IDAO<Contact> {
 
   /**
    * Rajoute un contact dans la base de donnees.
@@ -308,26 +308,32 @@ public class DAOContact implements IDAO {
   }*/
 
   @Override
-  public boolean create(Object entity) {
+  public List<Contact> readAll() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public boolean delete(int id) {
     // TODO Auto-generated method stub
     return false;
   }
 
   @Override
-  public Object read(int id) {
+  public boolean create(Contact entity) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
+  public Contact read(int id) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public List readAll() {
+  public boolean update(int id, Contact entity) {
     // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public void delete(int id) {
-    // TODO Auto-generated method stub
-
+    return false;
   }
 }

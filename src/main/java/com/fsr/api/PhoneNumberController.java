@@ -18,7 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping(path = "/phoneNumbers")
-public class phoneNumberController {
+public class PhoneNumberController {
 
   @Autowired private ServicePhoneNumber servicePhoneNumber;
 

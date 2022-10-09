@@ -7,7 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-public class DAOPhoneNumber implements IDAO {
+public class DAOPhoneNumber implements IDAO<PhoneNumber> {
 
   public boolean addPhoneNumber(int id, String phoneKind, String phoneNumber, Contact contact) {
 
@@ -97,26 +97,32 @@ public class DAOPhoneNumber implements IDAO {
   }
 
   @Override
-  public boolean create(Object entity) {
+  public List<PhoneNumber> readAll() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public boolean create(PhoneNumber entity) {
     // TODO Auto-generated method stub
     return false;
   }
 
   @Override
-  public Object read(int id) {
+  public PhoneNumber read(int id) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public List readAll() {
+  public boolean update(int id, PhoneNumber entity) {
     // TODO Auto-generated method stub
-    return null;
+    return false;
   }
 
   @Override
   public boolean delete(int id) {
     // TODO Auto-generated method stub
-
+    return false;
   }
 }

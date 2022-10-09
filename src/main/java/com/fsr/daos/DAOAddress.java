@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-public class DAOAddress implements IDAO {
+public class DAOAddress implements IDAO<Address> {
 
   public boolean addAddress(String street, String city, String zip, String country) {
     boolean success = false;
@@ -64,26 +64,32 @@ public class DAOAddress implements IDAO {
   }
 
   @Override
-  public boolean create(Object entity) {
+  public boolean create(Address entity) {
     // TODO Auto-generated method stub
     return false;
   }
 
   @Override
-  public Object read(int id) {
+  public Address read(int id) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public List readAll() {
+  public List<Address> readAll() {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public void delete(int id) {
+  public boolean update(int id, Address entity) {
     // TODO Auto-generated method stub
+    return false;
+  }
 
+  @Override
+  public boolean delete(int id) {
+    // TODO Auto-generated method stub
+    return false;
   }
 }

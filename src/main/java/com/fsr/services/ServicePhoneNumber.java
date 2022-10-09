@@ -1,47 +1,63 @@
 package com.fsr.services;
 
 import com.fsr.daos.DAOPhoneNumber;
-import com.fsr.entities.Contact;
 import com.fsr.entities.PhoneNumber;
 import java.util.List;
 
 public class ServicePhoneNumber implements IService<PhoneNumber> {
 
-  public void createPhoneNumber(int id, String phoneKind, String phoneNumber, Contact contact) {
+  DAOPhoneNumber daopn = new DAOPhoneNumber();
 
-    DAOPhoneNumber DaoPN = new DAOPhoneNumber();
-    boolean success = DaoPN.addPhoneNumber(id, phoneKind, phoneNumber, contact);
-    if (success) System.out.println("Numéro ajout�!");
-    else System.out.println("Numéro non ajout�!");
+  @Override
+  public void create(PhoneNumber t) {
+
+    boolean success = daopn.create(t);
+    if (success) {
+      System.out.println("PhoneNumber créée");
+    } else {
+      System.out.println("PhoneNumber non créée");
+    }
   }
 
   @Override
   public PhoneNumber read(int id) {
-    DAOPhoneNumber DaoPN = new DAOPhoneNumber();
-    PhoneNumber ph = DaoPN.getPhoneNumber(id);
-
-    System.out.println(ph.getId() + ph.getPhoneKind() + ph.getPhoneNumber() + ph.getContact());
+    try {
+      PhoneNumber a = daopn.read(id);
+      return a;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
   @Override
   public List<PhoneNumber> readAll() {
-    // TODO Auto-generated method stub
-    return null;
+    try {
+      List<PhoneNumber> PhoneNumberes = daopn.readAll();
+      return PhoneNumberes;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
-  public void update(int id, String phoneKind, String phoneNumber, Contact contact) {
-
-    DAOPhoneNumber DaoPN = new DAOPhoneNumber();
-    boolean success = DaoPN.UpdatePhoneNumber(id, phoneKind, phoneNumber, contact);
-    if (success) System.out.println("Numéro ajout�!");
-    else System.out.println("Numéro non ajout�!");
+  @Override
+  public void update(int id, PhoneNumber entity) {
+    boolean success = daopn.update(id, entity);
+    if (success) {
+      System.out.println("PhoneNumber mise à jour");
+    } else {
+      System.out.println("PhoneNumber non mise à jour");
+    }
   }
 
   @Override
   public void delete(int id) {
-    DAOPhoneNumber DaoPN = new DAOPhoneNumber();
-    boolean success = DaoPN.RemovePhoneNumber(id);
-    if (success) System.out.println("Numéro supprimé!");
-    else System.out.println("Numéro non supprimé!");
+    boolean success = daopn.delete(id);
+    if (success) {
+      System.out.println("PhoneNumber supprimée");
+    } else {
+      System.out.println("PhoneNumber non supprimée");
+    }
   }
 }
