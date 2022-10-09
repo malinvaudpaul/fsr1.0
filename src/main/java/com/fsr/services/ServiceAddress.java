@@ -5,9 +5,9 @@ import java.util.List;
 
 public class ServiceAddress implements IService<Address> {
 
-  public Address create(Address t) {
+  @Override
+  public void create(Address t) {
     // TODO Auto-generated method stub
-    return null;
   }
 
   @Override
@@ -22,13 +22,14 @@ public class ServiceAddress implements IService<Address> {
     return null;
   }
 
-  public Address update(Address t) {
+  @Override
+  public void delete(int id) {
     // TODO Auto-generated method stub
-    return null;
+
   }
 
   @Override
-  public void delete(int id) {
+  public void update(int id, Address entity) {
     // TODO Auto-generated method stub
 
   }

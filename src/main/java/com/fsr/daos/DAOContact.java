@@ -8,11 +8,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class DAOContact implements IDAOContact {
+public class DAOContact implements IDAO {
 
   /**
    * Rajoute un contact dans la base de donnees.
@@ -23,7 +24,7 @@ public class DAOContact implements IDAOContact {
    * @return renvoit le nouveau contact
    */
   @Override
-  public boolean addContact(String firstname, String lastname, String email) {
+  public boolean addContact(Contact entity) {
 
     boolean success = false;
     try {
@@ -271,7 +272,7 @@ public class DAOContact implements IDAOContact {
    * @param email
    * @return
    */
-  @Override
+  /*@Override
   public ArrayList<Contact> getContactByEmail(String email) {
     ArrayList<Contact> contacts = new ArrayList<Contact>();
 
@@ -304,5 +305,29 @@ public class DAOContact implements IDAOContact {
       e.printStackTrace();
     }
     return contacts;
+  }*/
+
+  @Override
+  public boolean create(Object entity) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
+  public Object read(int id) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public List readAll() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void delete(int id) {
+    // TODO Auto-generated method stub
+
   }
 }

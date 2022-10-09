@@ -47,11 +47,16 @@ public class ContactGroup {
     this.groupName = groupName;
   }
 
-  private int getGroupId() {
+  public ContactGroup(String groupName, Set<Contact> contactGroups) {
+    this.groupName = groupName;
+    this.contactGroups = contactGroups;
+  }
+
+  public int getGroupId() {
     return groupId;
   }
 
-  private void setGroupId(int groupId) {
+  public void setGroupId(int groupId) {
     this.groupId = groupId;
   }
 }

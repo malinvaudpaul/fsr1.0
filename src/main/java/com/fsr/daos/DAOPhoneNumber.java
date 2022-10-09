@@ -3,10 +3,11 @@ package com.fsr.daos;
 import com.fsr.entities.Contact;
 import com.fsr.entities.PhoneNumber;
 import com.fsr.util.JpaUtil;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-public class DAOPhoneNumber {
+public class DAOPhoneNumber implements IDAO {
 
   public boolean addPhoneNumber(int id, String phoneKind, String phoneNumber, Contact contact) {
 
@@ -93,5 +94,29 @@ public class DAOPhoneNumber {
       e.printStackTrace();
       return new PhoneNumber();
     }
+  }
+
+  @Override
+  public boolean create(Object entity) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
+  public Object read(int id) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public List readAll() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public boolean delete(int id) {
+    // TODO Auto-generated method stub
+
   }
 }

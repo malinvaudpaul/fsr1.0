@@ -6,6 +6,12 @@ import java.util.List;
 
 public class ServiceContact implements IService<Contact> {
 
+  @Override
+  public void create(Contact entity) {
+    // TODO Auto-generated method stub
+
+  }
+
   public void create(String fname, String lname, String email) {
 
     DAOContact daoc = new DAOContact();

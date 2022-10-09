@@ -21,25 +21,27 @@ public class AddressController {
 
   private ServiceAddress serviceAddress;
 
+  // CREATE CONTROLLER
   @PostMapping(path = "/", consumes = "application/json", produces = "application/json")
   public ResponseEntity<Object> addAddress(@RequestBody Address address) {
-    Integer id = addressDao.getAllAddresss().getAddressList().size() + 1;
+    /*Integer id = serviceAddress.readAll().size() + 1;
 
-    address.setId(id);
+    address.setIdAddress(id);*/
 
-    addressDao.addAddress(address);
+    serviceAddress.create(address);
 
     URI location =
         ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{id}")
-            .buildAndExpand(address.getId())
+            .buildAndExpand(address.getIdAddress())
             .toUri();
 
     return ResponseEntity.created(location).build();
   }
 
+  // READ CONTROLLERS
   @GetMapping(path = "/{id}", produces = "application/json")
-  public Address getAddresseById(@PathVariable("id") int id) {
+  public Address getAddressById(@PathVariable("id") int id) {
     return serviceAddress.read(id);
   }
 
@@ -48,12 +50,22 @@ public class AddressController {
     return serviceAddress.readAll();
   }
 
+  // UPDATE CONTROLLER
   @PatchMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
-  public Addresss updateAddress(@PathVariable("id") int id, @RequestBody Address address) {
-    address.setId(id);
-    return serviceAddress.update(address);
+  public ResponseEntity<Object> updateAddress(
+      @PathVariable("id") int id, @RequestBody Address address) {
+
+    serviceAddress.update(id, address);
+    URI location =
+        ServletUriComponentsBuilder.fromCurrentRequest()
+            .path("/{id}")
+            .buildAndExpand(address.getIdAddress())
+            .toUri();
+
+    return ResponseEntity.created(location).build();
   }
 
+  // DELETE CONTROLLER
   @DeleteMapping(path = "/{id}", produces = "application/json")
   public void deleteAddress(@PathVariable("id") int id) {
     serviceAddress.delete(id);

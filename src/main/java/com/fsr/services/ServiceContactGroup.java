@@ -6,6 +6,12 @@ import java.util.List;
 
 public class ServiceContactGroup implements IService<ContactGroup> {
 
+  @Override
+  public void create(ContactGroup entity) {
+    // TODO Auto-generated method stub
+
+  }
+
   public void create(String fname, String lname, String email) {
 
     DAOContactGroup daoc = new DAOContactGroup();
@@ -29,7 +35,7 @@ public class ServiceContactGroup implements IService<ContactGroup> {
   public void update(long id, String fname, String lname, String email) {
 
     DAOContactGroup daoc = new DAOContactGroup();
-    boolean ok = daoc.modifyContactGroup(id, fname, lname, email);
+    boolean ok = daoc.update(id, fname, lname, email);
     if (ok) System.out.println("ContactGroup modifi�!");
     else System.out.println("ContactGroup non modifi�!");
   }
@@ -37,8 +43,14 @@ public class ServiceContactGroup implements IService<ContactGroup> {
   @Override
   public void delete(int id) {
     DAOContactGroup daoc = new DAOContactGroup();
-    boolean success = daoc.deleteContactGroup(id);
+    boolean success = daoc.delete(id);
     if (!success) System.out.println("ContactGroup non supprim�!");
     else System.out.println("ContactGroup supprim�!");
+  }
+
+  @Override
+  public void update(int id, ContactGroup entity) {
+    // TODO Auto-generated method stub
+
   }
 }

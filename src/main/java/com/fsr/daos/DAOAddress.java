@@ -2,10 +2,11 @@ package com.fsr.daos;
 
 import com.fsr.entities.Address;
 import com.fsr.util.JpaUtil;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-public class DAOAddress {
+public class DAOAddress implements IDAO {
 
   public boolean addAddress(String street, String city, String zip, String country) {
     boolean success = false;
@@ -60,5 +61,29 @@ public class DAOAddress {
       e.printStackTrace();
     }
     return success;
+  }
+
+  @Override
+  public boolean create(Object entity) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
+  public Object read(int id) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public List readAll() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void delete(int id) {
+    // TODO Auto-generated method stub
+
   }
 }
