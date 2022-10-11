@@ -2,72 +2,47 @@ package com.fsr.api;
 
 import com.fsr.entities.Address;
 import com.fsr.services.ServiceAddress;
-import java.net.URI;
 import java.util.List;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
+import javax.ws.rs.core.UriInfo;
 
-@RestController
-@RequestMapping(path = "/addresses")
+@Path("/adresses")
 public class AddressController {
 
   private ServiceAddress serviceAddress;
 
-  // CREATE CONTROLLER
-  @PostMapping(path = "/", consumes = "application/json", produces = "application/json")
-  public ResponseEntity<Object> addAddress(@RequestBody Address address) {
-    /*Integer id = serviceAddress.readAll().size() + 1;
+  @Context UriInfo uriInfo;
 
-    address.setIdAddress(id);*/
+  @Context Request request;
 
+  @POST
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.TEXT_PLAIN)
+  public void createAdress(Address address) {
     serviceAddress.create(address);
-
-    URI location =
-        ServletUriComponentsBuilder.fromCurrentRequest()
-            .path("/{id}")
-            .buildAndExpand(address.getIdAddress())
-            .toUri();
-
-    return ResponseEntity.created(location).build();
   }
 
-  // READ CONTROLLERS
-  @GetMapping(path = "/{id}", produces = "application/json")
-  public Address getAddressById(@PathVariable("id") int id) {
-    return serviceAddress.read(id);
-  }
-
-  @GetMapping(path = "/", produces = "application/json")
-  public List<Address> getAddresses() {
+  // Return the list of Articles to the user in the browser
+  @GET
+  @Produces(MediaType.TEXT_XML)
+  public List<Address> getAdressesBrowser() {
     return serviceAddress.readAll();
   }
 
-  // UPDATE CONTROLLER
-  @PatchMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
-  public ResponseEntity<Object> updateAddress(
-      @PathVariable("id") int id, @RequestBody Address address) {
-
-    serviceAddress.update(address);
-    URI location =
-        ServletUriComponentsBuilder.fromCurrentRequest()
-            .path("/{id}")
-            .buildAndExpand(address.getIdAddress())
-            .toUri();
-
-    return ResponseEntity.created(location).build();
+  // Return the list of Articles for applications
+  @GET
+  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+  public List<Address> getAdresses() {
+    return serviceAddress.readAll();
   }
 
-  // DELETE CONTROLLER
-  @DeleteMapping(path = "/{id}", produces = "application/json")
-  public void deleteAddress(@PathVariable("id") int id) {
-    serviceAddress.delete(id);
+  @Path("{article}")
+  public Address getAddress(@PathParam("article") int id) {
+    return serviceAddress.read(id);
   }
 }
