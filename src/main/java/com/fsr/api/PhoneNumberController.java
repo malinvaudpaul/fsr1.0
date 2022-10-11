@@ -55,7 +55,7 @@ public class PhoneNumberController {
   @PatchMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
   public ResponseEntity<Object> updatePhoneNumber(
       @PathVariable("id") int id, @RequestBody PhoneNumber phoneNumber) {
-    servicePhoneNumber.update(id, phoneNumber);
+    servicePhoneNumber.update(phoneNumber);
 
     URI location =
         ServletUriComponentsBuilder.fromCurrentRequest()

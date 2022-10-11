@@ -8,21 +8,17 @@ import javax.persistence.EntityTransaction;
 
 public class DAOAddress implements IDAO<Address> {
 
-  public boolean addAddress(String street, String city, String zip, String country) {
+  @Override
+  public boolean create(Address entity) {
     boolean success = false;
     try {
 
-      // A vérifier qu'il ne faut pas instancier l'entityManager autre part (il est normalement en
-      // singleton)
-      // Persistence.createEntityManagerFactory("projetJPA");
       EntityManager em = JpaUtil.getEmf().createEntityManager();
-
-      Address a = new Address(street, city, zip, country);
 
       EntityTransaction tx = em.getTransaction();
       tx.begin();
 
-      em.persist(a);
+      em.persist(entity);
 
       tx.commit();
 
@@ -34,24 +30,67 @@ public class DAOAddress implements IDAO<Address> {
     return success;
   }
 
-  public boolean UpdateAddress(int id, String street, String city, String zip, String country) {
+  @Override
+  public Address read(int id) {
+    try {
+      EntityManager em = JpaUtil.getEmf().createEntityManager();
+      Address a = em.find(Address.class, id);
+      return a;
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  @Override
+  public List<Address> readAll() {
+    try {
+      EntityManager em = JpaUtil.getEmf().createEntityManager();
+
+      return em.createQuery("SELECT c FROM Address c").getResultList();
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  @Override
+  public boolean update(Address entity) {
     boolean success = false;
     try {
+      EntityManager em = JpaUtil.getEmf().createEntityManager();
+      Address a = em.find(Address.class, entity.getIdAddress());
 
-      // A vérifier qu'il ne faut pas instancier l'entityManager autre part (il est normalement en
-      // singleton)
-      // Persistence.createEntityManagerFactory("projetJPA");
+      EntityTransaction tx = em.getTransaction();
+      tx.begin();
+
+      a.setStreet(entity.getStreet());
+      a.setCity(entity.getCity());
+      a.setZip(entity.getZip());
+      a.setCountry(entity.getCountry());
+
+      tx.commit();
+
+      em.close();
+      success = true;
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return success;
+  }
+
+  @Override
+  public boolean delete(int id) {
+    boolean success = false;
+    try {
       EntityManager em = JpaUtil.getEmf().createEntityManager();
       Address a = em.find(Address.class, id);
 
       EntityTransaction tx = em.getTransaction();
       tx.begin();
 
-      em.persist(a);
-      a.setCity(city);
-      a.setStreet(street);
-      a.setZip(zip);
-      a.setCountry(country);
+      em.remove(a);
 
       tx.commit();
 
@@ -61,35 +100,5 @@ public class DAOAddress implements IDAO<Address> {
       e.printStackTrace();
     }
     return success;
-  }
-
-  @Override
-  public boolean create(Address entity) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public Address read(int id) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public List<Address> readAll() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public boolean update(int id, Address entity) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public boolean delete(int id) {
-    // TODO Auto-generated method stub
-    return false;
   }
 }

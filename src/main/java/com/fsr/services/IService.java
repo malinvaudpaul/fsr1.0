@@ -10,7 +10,7 @@ public interface IService<T> {
 
   public List<T> readAll();
 
-  public void update(int id, T entity);
+  public void update(T entity);
 
   public void delete(int id);
 }

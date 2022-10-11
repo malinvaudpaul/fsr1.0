@@ -42,8 +42,8 @@ public class ServiceContact implements IService<Contact> {
   }
 
   @Override
-  public void update(int id, Contact entity) {
-    boolean success = daoc.update(id, entity);
+  public void update(Contact entity) {
+    boolean success = daoc.update(entity);
     if (success) {
       System.out.println("Contact mise à jour");
     } else {

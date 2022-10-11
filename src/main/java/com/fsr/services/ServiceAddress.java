@@ -42,8 +42,8 @@ public class ServiceAddress implements IService<Address> {
   }
 
   @Override
-  public void update(int id, Address entity) {
-    boolean success = daoa.update(id, entity);
+  public void update(Address entity) {
+    boolean success = daoa.update(entity);
     if (success) {
       System.out.println("Adresse mise à jour");
     } else {

@@ -55,7 +55,7 @@ public class AddressController {
   public ResponseEntity<Object> updateAddress(
       @PathVariable("id") int id, @RequestBody Address address) {
 
-    serviceAddress.update(id, address);
+    serviceAddress.update(address);
     URI location =
         ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{id}")

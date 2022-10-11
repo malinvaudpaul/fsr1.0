@@ -11,7 +11,7 @@ public class ServiceContactGroup implements IService<ContactGroup> {
   @Override
   public void create(ContactGroup t) {
 
-    boolean success = daoc.create(t);
+    boolean success = daocg.create(t);
     if (success) {
       System.out.println("ContactGroup créée");
     } else {
@@ -42,8 +42,8 @@ public class ServiceContactGroup implements IService<ContactGroup> {
   }
 
   @Override
-  public void update(int id, ContactGroup entity) {
-    boolean success = daocg.update(id, entity);
+  public void update(ContactGroup entity) {
+    boolean success = daocg.update(entity);
     if (success) {
       System.out.println("ContactGroup mise à jour");
     } else {

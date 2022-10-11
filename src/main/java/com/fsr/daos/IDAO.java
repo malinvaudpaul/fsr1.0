@@ -10,7 +10,7 @@ public interface IDAO<T> {
 
   public List<T> readAll();
 
-  public boolean update(int id, T entity);
+  public boolean update(T entity);
 
   public boolean delete(int id);
 }

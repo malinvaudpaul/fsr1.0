@@ -42,8 +42,8 @@ public class ServicePhoneNumber implements IService<PhoneNumber> {
   }
 
   @Override
-  public void update(int id, PhoneNumber entity) {
-    boolean success = daopn.update(id, entity);
+  public void update(PhoneNumber entity) {
+    boolean success = daopn.update(entity);
     if (success) {
       System.out.println("PhoneNumber mise à jour");
     } else {
